@@ -1,39 +1,40 @@
 pipeline {
+    
     agent any
+
+    tools {
+        nodejs "Node_24"
+    }
 
     stages {
 
-        tools {
-            nodejs "Node_24"
-        }
-
         stage("Validate Version") {
-            step {
+            steps {
                 echo "node --version"
                 echo "npm --version"
             }
         } 
 
         stage("INSTALL") {
-            step {
+            steps {
                 sh "npm install"
             }             
         }
 
         stage('BUILD') {
-            step {
+            steps {
                 sh "npm run build"
             }
         }
 
         stage ("CLEANUP Workspace"){
-            step {
+            steps {
                 echo "Work Space cleaned up"
             }
         }
 
         stage("NOTIFICATION") {
-           step {
+           steps {
             echo "Notified via email"
            } 
         }
