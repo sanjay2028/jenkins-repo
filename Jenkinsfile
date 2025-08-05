@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("Initial Stage"){
             steps{
-                echo "Hello World!"
+                echo "Hello World with updated commit!"
             }
         }
     }
