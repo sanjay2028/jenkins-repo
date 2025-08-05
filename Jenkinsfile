@@ -13,12 +13,14 @@ pipeline {
             }
         }
         stage("Docker Hub"){
-            scripts {
-                withCredentials([string(credentialsId: 'sanjaydockerhub', variable: 'dockerhubpass.sanjay')]) {
-                    sh "docker login -u sanjay2028 -p ${dockerhubpass.sanjay}"
-                    sh "docker push sanjay2028/demobackend:${BUILD_ID}"
+            steps{
+                scripts {
+                    withCredentials([string(credentialsId: 'sanjaydockerhub', variable: 'dockerhubpass.sanjay')]) {
+                        sh "docker login -u sanjay2028 -p ${dockerhubpass.sanjay}"
+                        sh "docker push sanjay2028/demobackend:${BUILD_ID}"
+                    }
                 }
-            }
+            }           
         }
     }
 
