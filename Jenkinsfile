@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("Checkout"){
             steps{
-                sh "checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sanjay2028/demobackend']])"
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sanjay2028/demobackend']])
             }
         }
         stage("Build Image"){
