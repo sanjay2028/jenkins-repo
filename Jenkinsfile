@@ -8,10 +8,10 @@ pipeline {
             }
         }
         stage("Build Image"){
-            echo "BUild Image Completed"
-            // steps{
-            //     sh "docker build . -t sanjay2028/demobackend"
-            // }
+            steps{
+                echo "BUild Image Completed"
+                //sh "docker build . -t sanjay2028/demobackend"
+            }
         }
         stage("Docker Hub"){
             steps{
