@@ -31,7 +31,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'sanjaydockerhub', variable: 'dockerhubpass')]) {
                         sh """
                             echo ${dockerhubpass} | docker login --username sanjay2028 --password-stdin 
-                            docker push sanjay2028/demobackend:${env.BUILD_ID}
+                            docker push ${env.IMAGE_NAME}
                         """
                     }
                 }
@@ -42,7 +42,7 @@ pipeline {
             steps{
                 script{
                     sh """
-                        docker rmi -f ${env.BUILD_ID} || true
+                        docker rmi -f ${env.IMAGE_NAME} || true
                     """
                 }
             }
