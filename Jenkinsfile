@@ -13,10 +13,11 @@ pipeline {
                 //sh "docker build . -t sanjay2028/demobackend"
             }
         }
+
         stage("Docker Hub"){
             steps{
                 scripts {
-                    echo " Build id is ${env.BUILD_ID}"
+                    echo " Docker hub is pushed"
                 }
                 // scripts {
                 //     withCredentials([string(credentialsId: 'sanjaydockerhub', variable: 'dockerhubpass')]) {
