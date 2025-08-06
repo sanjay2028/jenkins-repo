@@ -42,7 +42,7 @@ pipeline {
             steps{
                 script{
                     sh """
-                        docker rmi -f ${env.BUILD_ID}
+                        docker rmi -f ${env.BUILD_ID} || true
                     """
                 }
             }
