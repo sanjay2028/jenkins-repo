@@ -8,16 +8,17 @@ pipeline {
             }
         }
         stage("Build Image"){
-            steps{
-                sh "docker build . -t sanjay2028/demobackend"
-            }
+            echo "BUild Image Completed"
+            // steps{
+            //     sh "docker build . -t sanjay2028/demobackend"
+            // }
         }
         stage("Docker Hub"){
             steps{
                 scripts {
-                    withCredentials([string(credentialsId: 'sanjaydockerhub', variable: 'dockerhubpass.sanjay')]) {
-                        sh "docker login -u sanjay2028 -p ${dockerhubpass.sanjay}"
-                        sh "docker push sanjay2028/demobackend:${BUILD_ID}"
+                    withCredentials([string(credentialsId: 'sanjaydockerhub', variable: 'dockerhubpass')]) {
+                        sh "docker login -u sanjay2028 -p ${dockerhubpass}"
+                        sh "docker push sanjay2028/demobackend:${env.BUILD_ID}"
                     }
                 }
             }           
