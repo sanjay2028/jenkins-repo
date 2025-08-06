@@ -9,8 +9,7 @@ pipeline {
         }
         stage("Build Image"){
             steps{
-                echo "BUild Image Completed"
-                //sh "docker build . -t sanjay2028/demobackend"
+                sh "docker build . -t sanjay2028/demobackend:${env.BUILD_ID}"
             }
         }
 
