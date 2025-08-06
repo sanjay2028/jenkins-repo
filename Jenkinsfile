@@ -7,9 +7,21 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sanjay2028/demobackend']])
             }
         }
+
         stage("Build Image"){
             steps{
-                sh "docker build . -t sanjay2028/demobackend:${env.BUILD_ID}"
+                script {
+                    env.IMAGE_NAME = "sanjay2028/demobackend:${env.BUILD_ID}"
+                    sh "docker build . -t ${env.IMAGE_NAME}"
+                }                
+            }
+        }
+
+        stage("Trivy Scan"){
+            steps{
+                sh """
+                    trivy image --exit-code 1 --severity HIGH,CRITICAL --no-progress ${env.IMAGE_NAME}
+                """
             }
         }
 
@@ -18,7 +30,7 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'sanjaydockerhub', variable: 'dockerhubpass')]) {
                         sh """
-                            docker login -u sanjay2028 -p ${dockerhubpass}
+                            echo ${dockerhubpass} | docker login --username sanjay2028 --password-stdin 
                             docker push sanjay2028/demobackend:${env.BUILD_ID}
                         """
                     }
