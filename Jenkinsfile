@@ -16,9 +16,7 @@ pipeline {
 
         stage("Docker Hub"){
             steps{
-                scripts {
-                    echo " Docker hub is pushed"
-                }
+                 echo " Docker hub is pushed"
                 // scripts {
                 //     withCredentials([string(credentialsId: 'sanjaydockerhub', variable: 'dockerhubpass')]) {
                 //         sh "docker login -u sanjay2028 -p ${dockerhubpass}"
