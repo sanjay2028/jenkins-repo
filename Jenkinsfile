@@ -37,6 +37,16 @@ pipeline {
                 }
             }           
         }
+
+        stage("Clean Up"){
+            steps{
+                script{
+                    sh """
+                        docker rmi -f ${env.BUILD_ID}
+                    """
+                }
+            }
+        }
     }
 
     post{
